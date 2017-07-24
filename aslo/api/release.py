@@ -130,6 +130,10 @@ def get_activity_metadata(repo_path):
 
         try:
             attributes = dict(parser.items('Activity'))
+            if 'license' not in attributes or not attributes['license']:
+                extracted_license = extract_license_from_path()
+                if extracted_license:
+                    attributes['license'] = extracted_license
         except configparser.NoSectionError as e:
             raise ReleaseError(
                 'Error parsing metadata file. Exception message: %s' % e
@@ -148,6 +152,18 @@ def get_activity_metadata(repo_path):
 
         return True
 
+    def extract_license_from_path():
+        LICENSE_FILE = os.path.join(repo_path, "LICENSE")
+        COPYING_FILE = os.path.join(repo_path, "COPYING")
+        if os.path.exists(LICENSE_FILE) and os.path.isfile(LICENSE_FILE):
+            with open(LICENSE_FILE) as f:
+                 # Reader Header for License name
+                return f.readline()
+
+        if os.path.exists(COPYING_FILE) and os.path.isfile(COPYING_FILE):
+            with open(COPYING_FILE) as f:
+                 # Reader Header for License name
+                return f.readline()
     logger.info('Getting activity metadata from activity.info file.')
     activity_file = metadata_file_exists()
     attributes = parse_metadata_file(activity_file)
