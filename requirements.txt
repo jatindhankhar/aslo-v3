@@ -12,3 +12,4 @@ polib
 pygithub
 imgurpython
 pytest
+Flask-Babel
