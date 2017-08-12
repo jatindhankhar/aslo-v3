@@ -23,6 +23,12 @@ class TestSimple(object):
         res = requests.get("http://localhost:5000")
         assert res.status_code == 200
 
+    def test_app_should_redirect_request_without_lang_preference(self):
+        res = requests.get("http://localhost:5000", allow_redirects=False)
+        # zpytest.
+        assert res.status_code == 302 and (
+            "localhost:5000/en/" in res.headers['Location'])
+
     @classmethod
     def teardown_class(cls):
         os.system('killall honcho')
