@@ -1,5 +1,7 @@
+
 [![Build Status](https://travis-ci.org/jatindhankhar/aslo-v3.svg?branch=master)](https://travis-ci.org/jatindhankhar/aslo-v3)
 
+## Following repo has been moved to [https://github.com/jatindhankhar/aslo-v3-copy](https://github.com/jatindhankhar/aslo-v3-copy)
 ### aslo-v3
 This repo hosts the upcoming version of ASLO (Software centre) for SugarLabs
 
